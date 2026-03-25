@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services – Remarkable Accounts</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:      #0D2B45;
+    --mid:       #065A82;
+    --teal:      #028090;
+    --teal-lt:   #E0F4F6;
+    --purple:    #3D3393;
+    --purple-lt: #EEEDFE;
+    --amber:     #A86320;
+    --amber-lt:  #FFF3E0;
+    --blue-lt:   #E6F1FB;
+    --coral:     #993C1D;
+    --coral-lt:  #FAECE7;
+    --green:     #0F6E56;
+    --green-lt:  #DFF2EC;
+    --sand:      #F7F8F9;
+    --white:     #FFFFFF;
+    --text:      #1A2B3C;
+    --muted:     #5A6B7A;
+    --border:    #DDE4EA;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--white);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.7;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    padding: 80px 40px 70px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 50% at 50% 110%, rgba(2,128,144,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-size: clamp(1.9rem, 5vw, 3rem);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .hero h1 span { color: var(--teal); }
+  .hero-divider {
+    width: 40px;
+    height: 2px;
+    background: var(--teal);
+    margin: 26px auto;
+  }
+  .hero-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    max-width: 500px;
+    margin: 0 auto;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  /* ── NAV TABS ── */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-bar::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    padding: 16px 22px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .nav-tab.t-audit:hover  { color: var(--navy);   border-color: var(--navy); }
+  .nav-tab.t-build:hover  { color: var(--mid);    border-color: var(--mid); }
+  .nav-tab.t-manage:hover { color: var(--teal);   border-color: var(--teal); }
+  .nav-tab.t-advise:hover { color: var(--purple); border-color: var(--purple); }
+  .nav-tab.t-train:hover  { color: var(--green);  border-color: var(--green); }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 72px 40px;
+    max-width: 980px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-num {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .s-audit  .section-title { color: var(--navy); }
+  .s-build  .section-title { color: var(--mid); }
+  .s-manage .section-title { color: var(--teal); }
+  .s-advise .section-title { color: var(--purple); }
+  .s-train  .section-title { color: var(--green); }
+
+  .rate-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .rate-pill {
+    display: inline-block;
+    padding: 5px 14px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #fff;
+  }
+  .s-audit  .rate-pill { background: var(--navy); }
+  .s-build  .rate-pill { background: var(--mid); }
+  .s-manage .rate-pill { background: var(--teal); }
+  .s-advise .rate-pill { background: var(--purple); }
+  .s-train  .rate-pill { background: var(--green); }
+
+  .rate-note {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .section-lead {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 700px;
+    margin-bottom: 36px;
+    line-height: 1.85;
+    font-weight: 400;
+  }
+
+  /* ── CARDS ── */
+  .cards {
+    display: grid;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .cards.two-col   { grid-template-columns: 1fr 1fr; }
+  .cards.three-col { grid-template-columns: 1fr 1fr 1fr; }
+
+  .card {
+    background: var(--white);
+    padding: 30px 26px;
+    transition: background 0.15s;
+  }
+  .card:hover { background: var(--sand); }
+
+  .card-bar {
+    height: 3px;
+    width: 28px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+  .s-audit  .card-bar { background: var(--navy); }
+  .s-build  .card-bar { background: var(--mid); }
+  .s-manage .card-bar { background: var(--teal); }
+  .s-advise .card-bar { background: var(--purple); }
+  .s-train  .card-bar { background: var(--green); }
+
+  .card-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .card-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.85;
+    font-weight: 400;
+  }
+
+  /* single-panel */
+  .single-panel {
+    background: var(--sand);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 34px 32px;
+  }
+  .single-panel .card-body {
+    font-size: 14px;
+    max-width: 700px;
+  }
+
+  /* IRD highlight card */
+  .card-highlight {
+    background: var(--navy);
+  }
+  .card-highlight:hover { background: #0f3454; }
+  .card-highlight .card-bar { background: var(--teal); }
+  .card-highlight .card-title { color: #fff; }
+  .card-highlight .card-body { color: rgba(255,255,255,0.6); }
+  .badge {
+    display: inline-block;
+    background: var(--teal);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+  }
+
+  /* ── FOOTER ── */
+  .footer-strip {
+    background: var(--navy);
+    padding: 44px 40px;
+    text-align: center;
+  }
+  .footer-strip p {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    font-family: 'Montserrat', sans-serif;
+  }
+  .footer-strip strong {
+    color: var(--teal);
+    font-weight: 700;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 680px) {
+    .section { padding: 52px 20px; }
+    .hero { padding: 56px 20px 48px; }
+    .cards.two-col,
+    .cards.three-col { grid-template-columns: 1fr; }
+    .nav-tab { padding: 14px 12px; font-size: 9px; }
+    .single-panel { padding: 24px 20px; }
+  }
+
+  /* ── SCROLL ANIMATION ── */
+  .section { opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .section.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-eyebrow">Remarkable Accounts · Services</p>
+  <h1>Audit · Build · Manage<br><span>Advise · Train</span></h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">Specialist bookkeeping for short-term rental property managers — built for the way your business actually works.</p>
+</header>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a href="#audit"  class="nav-tab t-audit">Audit</a>
+  <a href="#build"  class="nav-tab t-build">Build</a>
+  <a href="#manage" class="nav-tab t-manage">Manage</a>
+  <a href="#advise" class="nav-tab t-advise">Advise</a>
+  <a href="#train"  class="nav-tab t-train">Train</a>
+</nav>
+
+<!-- AUDIT -->
+<section id="audit" class="section s-audit">
+  <span class="section-num">01</span>
+  <h2 class="section-title">Audit</h2>
+  <div class="rate-row">
+    <span class="rate-pill">$120.00 + GST / hour</span>
+  </div>
+  <p class="section-lead">A deep-dive review of your current bookkeeping setup, owner statements, trust account reconciliations, and GST compliance. I'll identify gaps, inefficiencies, and risks — then deliver clear, actionable recommendations tailored to short-term rental property management.</p>
+  <div class="cards two-col">
+    <div class="card">
+      <div class="card-bar"></div>
+      <h3 class="card-title">GST Best Practice Audit</h3>
+      <p class="card-body">A specialist review of your GST position end-to-end — covering how platform income, management fees, cleaning charges, flat-rate credits, and owner fund flows are being treated under the online marketplace rules. You'll receive a plain-English findings summary and a prioritised action plan you can implement with confidence.</p>
+    </div>
+    <div class="card card-highlight">
+      <div class="badge">Exclusive</div>
+      <div class="card-bar"></div>
+      <h3 class="card-title">Confidential IRD Compliance Check</h3>
+      <p class="card-body">Through an established working relationship with IRD's platform economy team, I can conduct a confidential compliance check on your behalf — giving you certainty that you're meeting your obligations before any formal scrutiny arises.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BUILD -->
+<section id="build" class="section s-build">
+  <span class="section-num">02</span>
+  <h2 class="section-title">Build</h2>
+  <div class="rate-row">
+    <span class="rate-pill">$100.00 + GST / hour</span>
+  </div>
+  <div class="single-panel">
+    <div class="card-bar"></div>
+    <p class="card-body">Get your back office set up the right way from the start. I'll design and implement bookkeeping systems and processes specifically tailored to short-term rental property management — including best practice flow of funds, trust account structure, owner statement workflows, and GST compliance processes. Whether you're a new business or an established one that's outgrown a makeshift setup, this service gives you a clean, efficient foundation that's built to scale.</p>
+  </div>
+</section>
+
+<!-- MANAGE -->
+<section id="manage" class="section s-manage">
+  <span class="section-num">03</span>
+  <h2 class="section-title">Manage</h2>
+  <div class="rate-row">
+    <span class="rate-pill">$70.00 + GST / hour</span>
+    <span class="rate-note">— moving to a fixed monthly fee after three months</span>
+  </div>
+  <p class="section-lead">Fully managed, ongoing back office support for your short-term rental operation. We start on an hourly basis so I can get a clear picture of your workload, then transition to a fixed monthly fee for predictable, stress-free costs. Choose the level of support that suits your business:</p>
+  <div class="cards three-col">
+    <div class="card">
+      <div class="card-bar"></div>
+      <h3 class="card-title">Full Management</h3>
+      <p class="card-body">End-to-end bookkeeping including owner statements, guest fund reconciliations, GST returns, and compliance. You focus on your properties; I'll keep the numbers running like clockwork.</p>
+    </div>
+    <div class="card">
+      <div class="card-bar"></div>
+      <h3 class="card-title">Guest Receipts (Trust Account Management)</h3>
+      <p class="card-body">Focused management of your trust account — preparing and reconciling owner statements and ensuring guest funds are handled accurately and in line with best practice. Ideal for property managers who have their general bookkeeping covered but need specialist support keeping their trust account clean, compliant, and up to date.</p>
+    </div>
+    <div class="card">
+      <div class="card-bar"></div>
+      <h3 class="card-title">GST Returns and Compliance</h3>
+      <p class="card-body">Ongoing preparation and filing of GST returns, built on solid reconciliations and consistent coding rules. Includes supporting working papers and a clear audit trail — so your returns are accurate, explainable, and filed on time every period.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ADVISE -->
+<section id="advise" class="section s-advise">
+  <span class="section-num">04</span>
+  <h2 class="section-title">Advise</h2>
+  <div class="rate-row">
+    <span class="rate-pill">$100.00 + GST / hour</span>
+  </div>
+  <p class="section-lead">Need specialist input without the commitment? Book time to work through specific challenges — whether that's a one-off question, a process review, or strategic planning for growth.</p>
+  <div class="cards two-col">
+    <div class="card">
+      <div class="card-bar"></div>
+      <h3 class="card-title">Operational &amp; Strategic Advice</h3>
+      <p class="card-body">Practical guidance on how your business runs — from month-end close processes and owner payout policies to fee model structure, channel mix, scaling decisions, and cash flow planning through seasonal swings. Advice that fits the short-stay sector and leads to action, not just a report.</p>
+    </div>
+    <div class="card">
+      <div class="card-bar"></div>
+      <h3 class="card-title">Financial Analysis &amp; Reporting</h3>
+      <p class="card-body">Go beyond the basics with reporting you can actually use. Covering portfolio performance, profitability by property and owner, income and fee analysis, cost variance reporting, cash flow forecasting, and KPI dashboards — structured specifically for the realities of short-term rental property management.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRAIN -->
+<section id="train" class="section s-train">
+  <span class="section-num">05</span>
+  <h2 class="section-title">Train</h2>
+  <div class="rate-row">
+    <span class="rate-pill">$80.00 + GST / hour</span>
+  </div>
+  <div class="single-panel">
+    <div class="card-bar"></div>
+    <p class="card-body">Hands-on training tailored specifically to short-term rental property management. Whether you're onboarding a new team member, upskilling existing staff, or getting to grips with new software or processes yourself, I'll make sure your team has the knowledge and confidence to manage your back office with accuracy and efficiency.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer-strip">
+  <p>Ready to make your business more <strong>Remarkable</strong>? Get in touch with Melissa today.</p>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.section').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
